@@ -45,6 +45,7 @@ var defaultLayout = {
     children: [
       {
         size: 700,
+        cashed:true,
         tabs: [
           {
             ...tab,
@@ -52,16 +53,20 @@ var defaultLayout = {
             title: "LiteGraph",
             content: (
                 <LiteGraphComponent/>
-            )
+            ),
+             minWidth: 3
           }
-        ]
+        ],
+        
       },
       {
         size: 600,
+        cashed:true,
         tabs: [{ ...tab, id: "t8", title: "Three.js", content: <ThreeComponent /> }]
       },
       {
         size: 200,
+        cashed:true,
         tabs: [{ ...tab, id: "t9", title: "DatGui", content: <DatguiComponent/>}]
       }
     ]

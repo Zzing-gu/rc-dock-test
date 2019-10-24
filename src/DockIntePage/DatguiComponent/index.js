@@ -16,19 +16,22 @@ var AdboObject = function() {
     this.floorHeight= 30;
   };
 
+  var Adbo = new AdboObject()
+  var gui = new dat.GUI({autoPlace:false});
+  gui.add(Adbo , 'ramenWidth')
+
+  var datRef2
 
 export default function DatguiComponent(){
     const datRef =useRef()
 
     useEffect(()=>{
-        var Adbo = new AdboObject()
-        var gui = new dat.GUI({autoPlace:false});
-        gui.add(Adbo , 'ramenWidth')
+       
         gui.width = datRef.current.clientWidth
         datRef.current.appendChild(gui.domElement)
-
-        addDragStateListener(()=>{
-            gui.width = datRef.current.clientWidth
+        datRef2 = datRef.current
+        addDragStateListener((e)=>{
+            gui.width = datRef2.offsetWidth
         })
     },[])
 
