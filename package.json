@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dat.gui": "^0.7.6",
+    "litegraph.js": "^0.7.0",
+    "rc-dock": "^2.4.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "three": "^0.109.0",
+    "three-orbitcontrols": "^2.108.1"
   },
   "scripts": {
     "start": "react-scripts start",
