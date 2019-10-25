@@ -131,13 +131,8 @@ function clearThree(scene) {
     // })
     scene.material.dispose();
   }
-  // adding grid helper again
-  var size = 1000;
-  var divisions = 100;
-
-  //var gridHelper = new THREE.GridHelper(size, divisions);
-  //gridHelper.rotation.set(Math.PI/2, 0, 0)
-  //scene.add(gridHelper);
+ 
+  scene.add(GridHelper);
 
   scene.add(AxesHelper);
   meshArr = [];

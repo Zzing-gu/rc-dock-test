@@ -5,6 +5,9 @@ import { LiteGraph,LGraph, LGraphCanvas } from "litegraph.js";
 import { addDragStateListener, removeDragStateListener } from "rc-dock";
 
 import {CustomNodesCreate} from '../SpagettiUtils/customNodes'
+import {CheckResultJson, ClearData} from '../SpagettiUtils/threeFuncs'
+
+import {ClearWrapper} from '../ThreeComponent'
 
 CustomNodesCreate(LiteGraph)
 
@@ -52,8 +55,8 @@ export default function LiteGraphComponent() {
         onChange={loadFileAction}
       ></input>
       <button onClick={downloadAction}>Download</button>
-     
-      {/* <button onClick={JsonFetchAction}>SendJson</button> */}
+      <button onClick={clearScene}>ClearScene</button>
+      <button onClick={JsonFetchAction}>SendJson</button>
       <canvas ref={lgRef} id="mycanvas" width="1024" height="720"></canvas>
     </div>
   );
@@ -66,7 +69,7 @@ export default function LiteGraphComponent() {
 
 const StartAction = () => {
   //AllRenderer(); //??? 어떤 role
-  //ClearData();
+  ClearData();
   
   graphRef.runStep(1);
   //console.log(graph.current)
@@ -124,24 +127,24 @@ const downloadAction = () => {
 };
 
 const clearScene = () => {
-  //ClearWrapper()
+  ClearWrapper()
 }
 
-// const JsonFetchAction = () => {
-//   var result = CheckResultJson()
-//   console.log(result)
+const JsonFetchAction = () => {
+  var result = CheckResultJson()
+  console.log(result)
 
-//   var data = JSON.stringify(result);
-//   var file = new Blob([data]);
-//   var url = URL.createObjectURL(file);
-//   var element = document.createElement("a");
-//   element.setAttribute("href", url);
-//   element.setAttribute("download", "result.JSON");
-//   element.style.display = "none";
-//   document.body.appendChild(element);
-//   element.click();
-//   document.body.removeChild(element);
-//   setTimeout(function() {
-//     URL.revokeObjectURL(url);
-//   }, 1000 * 60); //wait one minute to revoke url
-// }
+  var data = JSON.stringify(result);
+  var file = new Blob([data]);
+  var url = URL.createObjectURL(file);
+  var element = document.createElement("a");
+  element.setAttribute("href", url);
+  element.setAttribute("download", "result.JSON");
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+  setTimeout(function() {
+    URL.revokeObjectURL(url);
+  }, 1000 * 60); //wait one minute to revoke url
+}
