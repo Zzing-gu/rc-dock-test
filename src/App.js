@@ -7,7 +7,6 @@ import 'rc-dock/dist/rc-dock.css'
 
 function App() {
   return (
-    
     <DockIntePage/>
   );
 }
