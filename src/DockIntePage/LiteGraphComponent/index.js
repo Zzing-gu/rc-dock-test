@@ -1,26 +1,24 @@
 import React, { useEffect, useRef } from "react";
 
 import "litegraph.js/css/litegraph.css";
-import { LiteGraph,LGraph, LGraphCanvas } from "litegraph.js";
+import { LiteGraph, LGraph, LGraphCanvas } from "litegraph.js";
 import { addDragStateListener, removeDragStateListener } from "rc-dock";
 
-import {CustomNodesCreate} from '../SpagettiUtils/customNodes'
-import {CheckResultJson, ClearData} from '../SpagettiUtils/threeFuncs'
+import { CustomNodesCreate } from "../SpagettiUtils/customNodes";
+import { CheckResultJson, ClearData } from "../SpagettiUtils/threeFuncs";
 
-import {ClearWrapper} from '../ThreeComponent'
+import { ClearWrapper } from "../ThreeComponent";
 
-CustomNodesCreate(LiteGraph)
+CustomNodesCreate(LiteGraph);
 
 export const graphRef = new LGraph();
 var lgCanvasRef;
 
-var  fileInputRef 
-
-
+var fileInputRef;
 
 export default function LiteGraphComponent() {
   const lgRef = useRef();
-   fileInputRef = useRef();
+  fileInputRef = useRef();
   useEffect(() => {
     lgCanvasRef = new LGraphCanvas(lgRef.current, graphRef);
     const funz = () => {
@@ -33,15 +31,16 @@ export default function LiteGraphComponent() {
     addDragStateListener(funz);
 
     return () => {
-      removeDragStateListener(funz)
-    }
+      removeDragStateListener(funz);
+    };
   }, []);
 
   return (
     <div
       style={{
         width: "100%",
-        height: "100%"
+        height: "100%",
+        backgroundColor: "#3d3d3d"
       }}
     >
       <button onClick={StartAction}>Start</button>
@@ -62,17 +61,12 @@ export default function LiteGraphComponent() {
   );
 }
 
-
-
-
-
-
 const StartAction = () => {
-  //AllRenderer(); //??? 어떤 role
-  ClearData();
   
+  ClearData();
+
   graphRef.runStep(1);
-  //console.log(graph.current)
+ 
 };
 const StopAction = () => {
   graphRef.stop();
@@ -80,18 +74,14 @@ const StopAction = () => {
 
 const saveAction = () => {
   console.log("saved");
-  localStorage.setItem(
-    "graphdemo_save",
-    JSON.stringify(graphRef.serialize())
-  );
+  localStorage.setItem("graphdemo_save", JSON.stringify(graphRef.serialize()));
 };
 
 const loadAction = () => {
   var data = localStorage.getItem("graphdemo_save");
- 
+
   if (data) {
     graphRef.configure(JSON.parse(data));
-   
   }
   console.log("loaded");
 };
@@ -100,13 +90,11 @@ const loadFileAction = () => {
   const fr = new FileReader();
 
   fr.addEventListener("load", e => {
-   
-    graphRef.configure(JSON.parse(fr.result))
+    graphRef.configure(JSON.parse(fr.result));
   });
 
   fr.readAsText(fileInputRef.current.files[0]);
 
- 
   console.log(" json loaded");
 };
 
@@ -127,12 +115,12 @@ const downloadAction = () => {
 };
 
 const clearScene = () => {
-  ClearWrapper()
-}
+  ClearWrapper();
+};
 
 const JsonFetchAction = () => {
-  var result = CheckResultJson()
-  console.log(result)
+  var result = CheckResultJson();
+  console.log(result);
 
   var data = JSON.stringify(result);
   var file = new Blob([data]);
@@ -147,4 +135,4 @@ const JsonFetchAction = () => {
   setTimeout(function() {
     URL.revokeObjectURL(url);
   }, 1000 * 60); //wait one minute to revoke url
-}
+};

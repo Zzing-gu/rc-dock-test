@@ -15,7 +15,7 @@ var defaultLayout = {
     mode: "horizontal",
     children: [
       {
-        size: 700,
+        size: 3,
         cashed: true,
         tabs: [
           {
@@ -28,12 +28,26 @@ var defaultLayout = {
         ]
       },
       {
-        size: 600,
-        cashed: true,
-        tabs: [
-          { ...tab, id: "t8", title: "Three.js", content: <ThreeComponent /> }
+        mode:'vertical',
+        size:600,
+        children:[
+          {
+            size: 600,
+            cashed: true,
+            tabs: [
+              { ...tab, id: "t8", title: "Three.js", content: <ThreeComponent /> }
+            ]
+          },
+          {
+            size: 600,
+            cashed: true,
+            tabs: [
+              { ...tab, id: "t99", title: "Three.js", content: <div>task</div> }
+            ]
+          },
         ]
       },
+     
       {
         size: 200,
         cashed: true,
